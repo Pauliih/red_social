@@ -12,16 +12,22 @@ $(document).ready(function() {
       $('#msg').val(""); // vacío el input del mensaje
       
       var contenedorChat = $('#contChat'); //El contenedor del chat lo pongo en una var.
-      // Generar la hora
-      var hour = new Date();
-      var hours = hour.getHours();
-      var minutes = hour.getMinutes();
+      // Generar la hora con moment
+      var dateNow = moment().format('MMMM Do YYYY, h:mm a');
+
       // Le paso los mensajes rescatados
-      contenedorChat.append('<div class="text-right message">' + '<p>' + message + '</p><br><span>' + hours + ':</span><span>' + minutes + '</span></div>');
+      contenedorChat.append('<div class="message">' + '<p>' + message + '</p><br><span>' + dateNow + '</span></div>');
     });
   //}
+
+  // Slide
+    $('.carousel').carousel({
+      interval: 2000
+    });
   
 });
+
+
 
 (function () {
   var config = {

@@ -3,8 +3,15 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <!-- para poner icono en la pestaña <link rel="shortcut icon" href="assets/img/favicon.ico"/> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- para poner icono en la pestaña -->
+    <link rel="shortcut icon" href="assets/img/favicon.ico"/>
     <title>Red Social</title>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Fuente Robot de google -->
@@ -57,7 +64,7 @@
     </section>
 
   <!-- barra lateral -->
-  <nav class="navbar navbar-inverse sidebar navbar-left2" role="navigation">
+  <nav class="navbar navbar-inverse navbar-fixed-left sidebar navbar-left2" role="navigation">
     <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -94,53 +101,66 @@
   </div>
 </nav>
   
-  <section id="main">
-    <div class="container">
+  <div id="main">
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-md-10 offset-md-2 post-newsfeed">
-          <div class="col-md-10 post">
+        <div class="col-md-10 offset-md-2">
+
+          <section id="slide" class="carousel slide">
+              <ol class="carousel-indicators">
+                <li data-target="#slide" data-slide-to="0" class="active"></li>
+                <li data-target="#slide" data-slide-to="1"></li>
+                <li data-target="#slide" data-slide-to="2"></li>
+              </ol>
+              
+              <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                  <img src="assets/img/slide-01-1252x644.jpg" class="img-responsive">
+                  <div class="carousel-caption hidden-xs hidden-sm">
+                    <h3>Ciclistas</h3>
+                    <p>Conoce otros ciclistas</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <img src="assets/img/slide-02-1252x644.jpg" class="img-responsive">
+                  <div class="carousel-caption hidden-xs hidden-sm">
+                    <h3>Cicletadas</h3>
+                    <p>Buscar eventos o crear uno tu</p>
+                  </div>
+                </div>
+                <div class="item">
+                  <img src="assets/img/slide-03-1252x644.jpg" class="img-responsive">
+                  <div class="carousel-caption hidden-xs hidden-sm">
+                    <h3>Compartir</h3>
+                    <p>Comparte tus fotos o lugares visitados</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Controles -->
+              <a href="#slide" class="left carousel-control" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+              <a href="#slide" class="right carousel-control" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+          </section><br>
+          
+          <div class="col-md-11 post">
             <textarea id="msg" placeholder="Comparte un mensaje aquí"></textarea>
             <button id="send"><i class="glyphicon glyphicon-ok-sign" aria-hidden="true"></i></button>
           </div>
 
-          <div class="col-md-10 newsfeed">
+          <div class="col-md-11 newsfeed">
             <div>
               <div id="contChat" class="">
               <p>Newsfeed</p>
               </div>
             </div>  
           </div>
+
         </div>
       </div>
     </div>  
-  </section>
+  </div>
 
-
-
-
-
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://use.fontawesome.com/7873633050.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <script src="assets/js/app.js"></script>
-  </body>
-=======
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Red Social</title>
-  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
-  <!-- INICIO formulario login -->
+<!-- INICIO formulario login -->
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
@@ -215,7 +235,7 @@
   </div>
   <!-- FIN formulario login --> 
 
-  <!-- line modal -->
+  <!-- registro perfil modal -->
   <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -377,131 +397,18 @@
       </div>
     </div>
   </div> 
-  
-  <div class="container">
-    <div class="row">
-      <div class="col-md-10 ">
-        <form class="form-horizontal">
-          <fieldset>      
-      <!-- Form Name -->
-            <legend>User profile form requirement</legend>      
-      <!-- Text input-->      
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Name (Full name)">Name (Full name)</label>  
-        <div class="col-md-4">
-          <div class="input-group">
-            <div class="input-group-addon"><i class="fa fa-user"></i></div>
-              <input id="Name (Full name)" name="Name (Full name)" type="text" placeholder="Name (Full name)" class="form-control input-md">
-          </div>          
-        </div>        
-      </div>
-      
-      <!-- File Button --> 
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Upload photo">Upload photo</label>
-        <div class="col-md-4"><input id="Upload photo" name="Upload photo" class="input-file" type="file"></div>
-      </div>
-      
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Date Of Birth">Date Of Birth</label>  
-        <div class="col-md-4">      
-          <div class="input-group">
-            <div class="input-group-addon"><i class="fa fa-birthday-cake"></i></div>
-            <input id="Date Of Birth" name="Date Of Birth" type="text" placeholder="Date Of Birth" class="form-control input-md">
-          </div>          
-        </div>
-      </div>      
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Father">Last Name</label>  
-        <div class="col-md-4">
-          <div class="input-group">
-            <div class="input-group-addon"><i class="fa fa-male" style="font-size: 20px;"></i></div>
-            <input id="Father" name="Father" type="text" placeholder="Father's name" class="form-control input-md">
-          </div>
-        </div>
-      </div>      
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Mother">Mother's Last Name</label>  
-        <div class="col-md-4">
-          <div class="input-group">
-            <div class="input-group-addon"><i class="fa fa-female" style="font-size: 20px;"></i></div>
-            <input id="Mother" name="Mother" type="text" placeholder="Mother's Name" class="form-control input-md">
-          </div>
-        </div>
-      </div>      
-      <!-- Multiple Radios (inline) -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Gender">Gender</label>
-        <div class="col-md-4"> 
-          <label class="radio-inline" for="Gender-0">
-            <input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
-            Male
-          </label> 
-          <label class="radio-inline" for="Gender-1">
-            <input type="radio" name="Gender" id="Gender-1" value="2">
-            Female
-          </label> 
-        </div>
-      </div>      
-      <div class="form-group">
-        <label class="col-md-4 control-label col-xs-12" for="Permanent Address">Address</label>  
-        <div class="col-md-2  col-xs-4">
-          <input id="Permanent Address" name="Permanent Address" type="text" placeholder="District" class="form-control input-md ">
-        </div>      
-        <div class="col-md-2 col-xs-4">      
-          <input id="Permanent Address" name="Permanent Address" type="text" placeholder="Area" class="form-control input-md ">
-        </div>        
-      </div>      
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Permanent Address"></label>  
-        <div class="col-md-2  col-xs-4">
-          <input id="Permanent Address" name="Permanent Address" type="text" placeholder="Street" class="form-control input-md ">
-        </div>
-      </div>        
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Email Address">Email</label>  
-        <div class="col-md-4">
-          <div class="input-group">
-            <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-            <input id="Email Address" name="Email Address" type="text" placeholder="Email Address" class="form-control input-md">
-          </div>
-        </div>
-      </div>         
-      <!-- Textarea -->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="Overview (max 200 words)">Overview (max 200 words)</label>
-        <div class="col-md-4">                     
-          <textarea class="form-control" rows="10"  id="Overview (max 200 words)" name="Overview (max 200 words)">Overview</textarea>
-        </div>
-      </div>      
-      <div class="form-group">
-        <label class="col-md-4 control-label" ></label>  
-        <div class="col-md-4">
-          <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span> Subir</a>
-          <a href="#" class="btn btn-danger" value=""><span class="glyphicon glyphicon-remove-sign"></span> Limpiar</a>
-        </div>
-      </div>
-      
-      </fieldset>
-      </form>
-      </div>
-      <div class="col-md-2 hidden-xs">
-        <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">
-      </div>      
-    </div>
-  </div>
-  
-  
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+
+
+
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
   crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
-  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
-  crossorigin="anonymous"></script>
-  <script src="assets/js/app.js"></script>
-</body>
+    <script src="https://use.fontawesome.com/7873633050.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/app.js"></script>
+  
+  </body>
 
 </html>
