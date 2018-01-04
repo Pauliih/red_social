@@ -1,30 +1,54 @@
 $(document).ready(function() {
   
-  /*
-  if($('#msg').val() === "" ){
-    alert("Tienes que escribir un mensaje!")
-  }else{
-    */
-    //Insetar el mensaje en el chat
-    $('#send').click(function() {
-      var message = $('#msg').val(); // Rescato el mensaje del input
-      
-      $('#msg').val(""); // vacío el input del mensaje
-      
-      var contenedorChat = $('#contChat'); //El contenedor del chat lo pongo en una var.
-      // Generar la hora con moment
-      var dateNow = moment().format('MMMM Do YYYY, h:mm a');
+  var containerPosts = $('#contPost'); //El contenedor del chat lo pongo en una var.
 
-      // Le paso los mensajes rescatados
-      contenedorChat.append('<div class="message">' + '<p>' + message + '</p><br><span>' + dateNow + '</span></div>');
-    });
-  //}
+  $('#filter-newsfeed').on('change', function() {
+      var selection = $('#filter-newsfeed').val();
+      if( selection === "1") {
+      containerPosts.html('<p>Esto es un append lo mas popular</p> <img class="img-responsive" src="https://i.pinimg.com/originals/9c/8f/51/9c8f51dac7738e0d5981d5b3fce5a4a6.gif"/>');
+      }
+      if( selection === "2") {
+      containerPosts.html('<p>Esto es un append lo más comentado</p> <img class="img-responsive" src="https://i.pinimg.com/originals/9c/8f/51/9c8f51dac7738e0d5981d5b3fce5a4a6.gif"/>');
+      }
+    })
+  //Insetar el mensaje en el chat
+  $('#send').click(function() {
+    var message = $('#post').val(); // Rescato el mensaje del input
+    
+    $('#post').val(""); // vacío el input del mensaje
+    
+    
+    // Generar la hora con moment
+    var dateNow = moment().format('MMMM Do YYYY, h:mm a');
+
+    // Le paso los mensajes rescatados y prepend para añadir el elemento antes que el otro
+    containerPosts.prepend('<div class="row message">' + '<p>' + message + '</p><br><span>' + dateNow + '</span></div>');
+  });
+
 
   // Slide
     $('.carousel').carousel({
       interval: 2000
     });
-  
+
+    //Subir imagen
+    $('.post').find('.wall-friend').click(function(){
+      $('#wall-location').hide();
+      $('#wall-photo').hide();
+      $('#wall-friend').show();
+    });
+    
+    $('.post').find('.wall-photo').click(function(){
+      $('#wall-friend').hide();
+      $('#wall-location').hide();
+      $('#wall-photo').show();
+    });
+
+    $('.post').find('.wall-location').click(function(){
+      $('#wall-friend').hide();
+      $('#wall-photo').hide();
+      $('#wall-location').show();
+    });
 });
 
 

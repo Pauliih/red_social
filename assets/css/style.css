@@ -3,46 +3,56 @@ Colores
 Celeste: #01B0F1FF
 Verde: #06E0A3FF
 */
-body,html{
+body,html {
   height: 100%;
   font-family: 'Roboto', sans-serif;
-  background-color: #01B0F1FF;
+  background-color:;
 }
 
-.logo_bike{
-  width: 35%;
-  margin-top: -1.5em;
+.logo_bike {
+  width: 65%;
+  margin-top: -1em;
 }
 
-.logo_bike2{
+.logo_bike2 {
   width: 35%;
   margin-top: -1em;
   margin-left: 2.5em; 
 }
 
-#main{
+#main {
   margin-top: 5.6em;
 }
 
-.navbar-toppy{
-  padding-top: 1em;
+.navbar-toppy {
+  padding-top: 1.5em;
   padding-bottom: 1em;
 }
 
+.navbar-left2 {
+  position: fixed;
+  margin-top: 0.5em;
+}
 
+.container-fluid-left {
+  padding-left: 0;
+}
 
 /* Slide */
-#slide{
+#slide {
   margin-top: 1%;
   padding-left: 0;
 }
 
-.carousel-caption{
+.carousel-caption {
   background: rgba(27, 28, 30, 0.5);
 }
 
 /* Post-newsfeed */
 
+#filter-newsfeed{
+  margin-top: 1em;
+}
 .message {
   background-color: #DCF6C5FF;
   border-radius: 1em;
@@ -51,20 +61,13 @@ body,html{
   padding: 1em;
 }
 
-.msg-chats, .search {
-  border-bottom: 1px solid lightgrey;
-}
-
-.newsfeed{
-  height: 80vh;
-}
-
-.post {
-  height: 20vh;
+.btn-post{
+  background-color: #01B0F1FF;
+  color: #fff;
 }
 
 
-/*Remove rounded coners*/
+/* Elimina bordes redondeados */
 
 nav.sidebar.navbar {
   border-radius: 0px;
@@ -315,3 +318,100 @@ section{
 	border-color: #1CA347;
 }
 /*FIN Estilos del login*/
+
+/*POST*/
+
+.title-newsfeed{
+  color: #06E0A3FF;
+  font-weight: bold;
+}
+.post{
+  background:#fff;
+  border:1px solid #eee;
+  border-radius:2px;
+  padding:10px;
+  padding-top:0;
+  margin-bottom:10px;
+}
+
+.post textarea{
+  padding:10px;
+  width:100%;
+  border:1px solid;
+  border-color:#e5e6e9 #dfe0e4;
+  border-bottom:0;
+  border-top:0;
+  resize:none;
+  outline:0;
+}
+
+.post .controls{
+  background-color:#f6f7f8;
+  border-bottom:1px solid #e9eaed;
+  border-left:1px solid #e9eaed;
+  border-right:1px solid #e9eaed;
+  height:40px;width:100%;
+  margin-top:3px;
+  margin-top:-5px;
+  padding-right:10px;
+}
+
+.post .wall-tabs{
+  border-bottom:1px solid #e5e5e5;
+  background-color:#f6f7f8;
+  border:1px solid #e9eaed;
+  margin-top:5px}
+
+.post .wall-tabs .item{
+  padding:10px;display:
+  inline-flex;
+  cursor:pointer;
+  border-bottom:1px solid #eee;
+  font-weight:bold;
+  font-size:13px}
+
+.post .wall-tabs .item:hover{
+  background:#eee;
+}
+
+.post .wall-tabs .item div{
+  display:inline-block}
+
+.post .wall-tabs .item .text{
+  font-weight:bold;
+  margin-top:1px;
+  margin-left:5px;
+  position:absolute;
+  font-size:15px;
+}
+
+.post .controls li{
+  padding:10px;
+  display:inline-block;
+  cursor:pointer}
+
+.post .controls li:hover{
+  background:#eee;
+}
+
+
+.post input[type="file"]{
+  border-left:1px solid #EEE;
+  border-right:1px solid #EEE}
+
+.post input[type="file"],.post input[type="text"]{
+  width:100%;
+  border-top:1px dashed #EEE;
+  padding:5px;
+  margin-bottom:5px;
+  margin-top:-5px;
+  outline:0;
+}
+
+#input-wall-friend{
+  width:100% !important;
+  border-top:1px dashed #EEE;
+  padding:7px;
+  margin-bottom:5px;
+  margin-top:-5px;
+}
