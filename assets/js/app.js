@@ -14,10 +14,7 @@ $(document).ready(function() {
   //Insetar el mensaje en el chat
   $('#send').click(function() {
     var message = $('#post').val(); // Rescato el mensaje del input
-    
     $('#post').val(""); // vacío el input del mensaje
-    
-    
     // Generar la hora con moment
     var dateNow = moment().format('MMMM Do YYYY, h:mm a');
 
@@ -49,63 +46,92 @@ $(document).ready(function() {
       $('#wall-photo').hide();
       $('#wall-location').show();
     });
-});
 
+//-------INICIALIZANDO Firebase------------------//
+    var config = {
+      apiKey: "AIzaSyAd_v2ft8K0cwDm9oeJBJsSHMjbL3NfQHU",
+      authDomain: "redsocial-d7c8d.firebaseapp.com",
+      databaseURL: "https://redsocial-d7c8d.firebaseio.com",
+      projectId: "redsocial-d7c8d",
+      storageBucket: "redsocial-d7c8d.appspot.com",
+      messagingSenderId: "955732054670"
+    };
+    firebase.initializeApp(config);
 
-
-(function () {
-  var config = {
-    apiKey: "AIzaSyAd_v2ft8K0cwDm9oeJBJsSHMjbL3NfQHU",
-    authDomain: "redsocial-d7c8d.firebaseapp.com",
-    databaseURL: "https://redsocial-d7c8d.firebaseio.com",
-    projectId: "redsocial-d7c8d",
-    storageBucket: "redsocial-d7c8d.appspot.com",
-    messagingSenderId: "955732054670"
-  };
-  firebase.initializeApp(config);
-
-  //Obteniendo elementos del DOM
-  /* var email = document.getElementById('email');
-  var pass = document.getElementById('password');
-  var login = document.getElementById('logIn');
-  var register = document.getElementById('register');
-  var logout = document.getElementById('logOut'); */
-
+    var uid = "";
+//----------------ANIMACIÓN LOGIN/REGISTER--------------------//
   $('#login-form-link').click(function(e) {
-		$("#login-form").delay(100).fadeIn(100);
- 		$("#register-form").fadeOut(100);
-		$('#register-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
-	});
-	$('#register-form-link').click(function(e) {
-		$("#register-form").delay(100).fadeIn(100);
- 		$("#login-form").fadeOut(100);
-		$('#login-form-link').removeClass('active');
-		$(this).addClass('active');
-		e.preventDefault();
+    $("#login-form").delay(100).fadeIn(100);
+      $("#register-form").fadeOut(100);
+    $('#register-form-link').removeClass('active');
+    $(this).addClass('active');
+    e.preventDefault();
   });
-  
-  //Eventos para el registro
-  login.addEventListener('click', function() {
-    var emailValue = email.value;
-    var passValue = pass.value;
-    firebase.auth().signInWithEmailAndPassword(emailValue, passValue).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // ...
-     });
+  $('#register-form-link').click(function(e) {
+    $("#register-form").delay(100).fadeIn(100);
+      $("#login-form").fadeOut(100);
+    $('#login-form-link').removeClass('active');
+    $(this).addClass('active');
+    e.preventDefault();
   });
-  register.addEventListener('click', function() {
-    var emailValue = email.value;
-    var passValue = pass.value;
-    var auth = firebase.auth();
 
-    var promise = auth.createUserWithEmailAndPassword(emailValue, passValue)
-  .catch(function(error) {console.error (error.message)});
+  //-----------------AUTENTICACIÓN DE EMAIL---------------------//
+  $('#logIn').click(function() {
+    var email = $('#emailLogin').val();
+    var pass = $('#passwordLogin').val();
+    var auth = firebase.auth();
+    $('#emailLogin').val("");
+    $('#passwordLogin').val("");
+      // Sign in
+    var promise = auth.signInWithEmailAndPassword(email, pass);
+    promise.catch(e => console.log(e.message));      
+  });
+  $('#register').click(function() {
+    var email = $('#emailRegister').val();
+    var pass = $('#passwordRegister').val();
+    var auth = firebase.auth();
+    $('#emailRegister').val("");
+    $('#passwordRegister').val("");
+    // Sign in
+    var promise = auth.createUserWithEmailAndPassword(email, pass);
+    promise.catch(e => console.log(e.message));
   }); 
 
-  
-} ());
+  $('#logOut').click(function() {
+    firebase.auth().signOut();
+  });
 
+  firebase.auth().onAuthStateChanged( firebaseUser => {
+    if(firebaseUser) {
+      console.log(firebaseUser);
+      uid = firebaseUser.uid;
+     // $('#logOut').classList.remove('hide');
+      $('#formLogin').hide();
+      $('#bar').classList.remove('hidden');
+      $('#main').classList.remove('hidden')
+    } else {
+      console.log('no logueado');
+      //$('#logOut').classList.add('hide');
+    }    
+  });
+  //----------------------- DATEPICKER -----------------------------------//
+  var date_input=$('input[name="dateofBirth"]'); //our date input has the name "date"
+  var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+  var options={
+    format: 'mm/dd/yyyy',
+    container: container,
+    todayHighlight: true,
+    autoclose: true,
+  };
+  date_input.datepicker(options);
+
+  //Nueva Foto en seccion de ciclistas
+    function newCyclistProfile() {
+      $('#ciclyst container').append('<div class="col-md-3 well">'+
+      '<center><a href="#aboutModal" data-toggle="modal" data-target="#myModal">'+
+      '<img src="" name="aboutme" width="140" height="140" class="img-circle"></a>'+
+      '<h3>'+nameCyclist+'</h3><em>click my face for more</em></center></div>')
+    }
+
+
+});

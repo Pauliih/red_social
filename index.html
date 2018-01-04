@@ -12,6 +12,8 @@
     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+    <!-- Bootstrap Date-Picker Plugin -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!-- Fuente Robot de google -->
@@ -20,7 +22,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body>
-    <section id="bar">
+    <section id="bar" class="">
       <nav class="navbar navbar-default navbar-inverse navbar-fixed-top navbar-toppy">
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
@@ -35,13 +37,12 @@
               <img class="logo_bike" alt="Brand" src="assets/img/logo3.png">
             </a>
           </div>
-
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
               <li>
                 <div class="form-group">
-                <input type="text" class="form-control" placeholder="Ciclistas, Cicletadas, Etiquetas">
+                  <input type="text" class="form-control" placeholder="Ciclistas, Cicletadas, Etiquetas">
                 </div>
               </li>
               <li>
@@ -54,7 +55,7 @@
                   <li><a href="#">Amigos Ciclistas</a></li>
                   <li><a href="#">Crear evento</a></li>
                   <li role="separator" class="divider"></li>
-                  <li><a href="#">Cerrar Sesión</a></li>
+                  <li><a href="#" id="logOut">Cerrar Sesión</a></li>
                 </ul>
               </li>
             </ul>
@@ -62,15 +63,10 @@
         </div><!-- /.container-fluid -->
       </nav>
     </section>
-
-  
-  
-    <div id="main">
+    <section id="main" class="">
       <div class="container-fluid container-fluid-left">
         <div class="row">
-
-          <div class="col-md-2">
-            
+          <div class="col-md-2">            
             <!-- barra lateral -->
             <nav class="navbar navbar-inverse sidebar navbar-left2" role="navigation">
               <div class="container-fluid">
@@ -98,9 +94,8 @@
               </div>
             </nav>            
           </div>
-
-          <div class="col-md-10">
-            <section id="slide" class="carousel slide">
+          <div class="col-md-12">
+            <section id="slide" class="carousel slide hidden">
                 <ol class="carousel-indicators">
                   <li data-target="#slide" data-slide-to="0" class="active"></li>
                   <li data-target="#slide" data-slide-to="1"></li>
@@ -119,7 +114,7 @@
                     <img src="assets/img/slide-02-1252x644.jpg" class="img-responsive">
                     <div class="carousel-caption hidden-xs hidden-sm">
                       <h3>Cicletadas</h3>
-                      <p>Buscar eventos o crear uno tu</p>
+                      <p>Buscar eventos o crear uno nuevo</p>
                     </div>
                   </div>
                   <div class="item">
@@ -135,75 +130,81 @@
                 <a href="#slide" class="left carousel-control" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
                 <a href="#slide" class="right carousel-control" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
             </section><br>
-
-            <div class="row">
-              <div class="col-md-10 col-md-offset-1 post">               
-                <div class="tabs-input">
-                  <div class="wall-tabs">
-                      <li class="item"><i class="fa fa-bullhorn"></i>Post</li>  
+            <div id="post" class="hidden">
+              <div class="row">
+                  <div class="col-md-10 col-md-offset-1 post">               
+                    <div class="tabs-input">
+                      <div class="wall-tabs">
+                        <li class="item"><i class="fa fa-bullhorn"></i>Post</li>  
+                      </div>
+                  </div>
+                  <div>
+                    <textarea id="post" placeholder="Comparte un mensaje aquí"></textarea>      
+                      <div id="wall-friend" style="display:none;">
+                        <input type="text" autocomplete="off" autocapitalize="off" placeholder="Etiqueta ciclista">
+                      </div>      
+                      <div id="wall-location" style="display:none;">
+                        <input type="text" placeholder="Ubicación">
+                      </div>      
+                      <div id="wall-photo" style="display: none;">
+                          <input type="file">
+                      </div>
+                        <div class="controls">
+                        <li class="wall-friend">
+                          <i class="fa fa-users"></i>
+                        </li>  
+                        <li class="wall-location">
+                          <i class="glyphicon glyphicon-map-marker"></i>
+                        </li>  
+                        <li class="wall-photo">
+                          <i class="glyphicon glyphicon-picture"></i>
+                        </li>                            
+                        <div style="float:right;">
+                          <input id="send" class="btn btn-post" type="submit" value="Post">
+                        </div>
+                      </div>
                   </div>
                 </div>
-                <div>
-                  <textarea id="post" placeholder="Comparte un mensaje aquí"></textarea>
-
-                  <div id="wall-friend" style="display:none;">
-                    <input type="text" autocomplete="off" autocapitalize="off" placeholder="Etiqueta ciclista">
-                  </div>
-
-                  <div id="wall-location" style="display:none;">
-                    <input type="text" placeholder="Ubicación">
-                  </div>
-
-                  <div id="wall-photo" style="display: none;">
-                      <input type="file">
-                  </div>
-                  <div class="controls">
-                    <li class="wall-friend">
-                      <i class="fa fa-users"></i>
-                    </li>  
-                    <li class="wall-location">
-                      <i class="glyphicon glyphicon-map-marker"></i>
-                    </li>  
-                    <li class="wall-photo">
-                      <i class="glyphicon glyphicon-picture"></i>
-                    </li>  
-                      
-                    <div style="float:right;">
-                      <input id="send" class="btn btn-post" type="submit" value="Post">
+              </div>
+            </div>   
+            <div id="newfeed" class="hidden">
+              <div class="row">
+                <div class="col-md-10 col-md-offset-1 newsfeed">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h3 class="title-newsfeed">Newsfeed</h3>
                     </div>
+                    <div class="col-md-6 text-right">
+                      <select id="filter-newsfeed">
+                        <option value="0">Lo más reciente</option>
+                        <option value="1">Lo más popular</option>
+                        <option value="2">Lo más comentado</option>                      
+                      </select>
+                    </div>                  
                   </div>
+                  <div class="col-md-12" id="contPost"></div>  
                 </div>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col-md-10 col-md-offset-1 newsfeed">
-                <div class="row">
-                  <div class="col-md-6">
-                    <h3 class="title-newsfeed">Newsfeed</h3>
-                  </div>
-                  <div class="col-md-6 text-right">
-                    <select id="filter-newsfeed">
-                      <option value="0">Lo más reciente</option>
-                      <option value="1">Lo más popular</option>
-                      <option value="2">lo más comentado</option>                      
-                    </select>
-                  </div>                  
-                </div>
-                <div class="col-md-12" id="contPost"></div>  
-              </div>
-            </div>
-            
           </div>
         </div>
       </div>
-
+    </section>
       <!-- INICIO formulario login -->
+    <section id="formLogin" class="hidden">
+      <div class="row logoLogin">
+        <div class="col-md-5 col-md-offset-4">
+          <img class="logo_bike" alt="Brand" src="assets/img/logo3.png">
+        </div>
+      </div>
       <div class="container">
         <div class="row">
-          <div class="col-md-6 col-md-offset-3">
+          <div class="col-md-6 col-md-offset-3 col-xs-12">
             <div class="panel panel-login">
               <div class="panel-heading">
+                <!-- <div class="row col-xs-12">
+                  <img class="logo_bike" alt="Brand" src="assets/img/logo3.png">   
+                </div> -->
                 <div class="row">
                   <div class="col-xs-6">
                     <a href="#" class="active" id="login-form-link">Iniciar Sesión</a>
@@ -217,12 +218,12 @@
               <div class="panel-body">
                 <div class="row">
                   <div class="col-lg-12">
-                    <form id="login-form" action="https://phpoll.com/login/process" method="post" role="form" style="display: block;">
+                    <form id="login-form" role="form" style="display: block;">
                       <div class="form-group">
-                        <input type="text" name="email" id="email" tabindex="1" class="form-control" placeholder="Email" value="">
+                        <input type="text" name="email" id="emailLogin" tabindex="1" class="form-control" placeholder="Email" value="">
                       </div>
                       <div class="form-group">
-                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Contraseña">
+                        <input type="password" name="pass" id="passwordLogin" tabindex="2" class="form-control" placeholder="Contraseña">
                       </div>
                       <div class="form-group text-center">
                         <input type="checkbox" tabindex="3" class="" name="remember" id="remember">
@@ -231,37 +232,25 @@
                       <div class="form-group">
                         <div class="row">
                           <div class="col-sm-6 col-sm-offset-3">
-                            <input type="submit" name="login-submit" id="login-submit" tabindex="4" class="form-control btn btn-login" value="Login">
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="text-center">
-                              <a href="https://phpoll.com/recover" tabindex="5" class="forgot-password">Olvidaste tu clave?</a>
-                            </div>
+                            <button name="login-submit" id="logIn" tabindex="4" class="form-control btn btn-login">Login</button>
                           </div>
                         </div>
                       </div>
                     </form>
                     <form id="register-form" action="" method="" role="form" style="display: none;">
                       <div class="form-group">
-                        <input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
+                        <input type="email" name="emailRegister" id="emailRegister" tabindex="1" class="form-control" placeholder="Email Address" value="">
                       </div>
                       <div class="form-group">
-                        <input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
+                        <input type="password" name="passwordRegister" id="passwordRegister" tabindex="2" class="form-control" placeholder="Password">
                       </div>
                       <div class="form-group">
-                        <input type="password" name="confirm-password" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
-                      </div>
-                      <div class="form-group">
-                        <div class="row">
-                          <div class="col-sm-6 col-sm-offset-3">
-                            <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
-                            <button data-toggle="modal" data-target="#squarespaceModal" type="button" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-register">Regístrate ahora</button>
+                          <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                              <!--<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>-->
+                              <button data-toggle="modal" data-target="#squarespaceModal" type="button" name="register-submit" id="register" tabindex="4" class="form-control btn btn-register">Regístrate ahora</button>
+                            </div>
                           </div>
-                        </div>
                       </div>
                     </form>
                   </div>
@@ -270,10 +259,11 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>      
+    </section>
       <!-- FIN formulario login --> 
-
-      <!-- registro perfil modal -->
+      <!-- INICIO registro perfil modal -->
+    <section>
       <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -282,73 +272,72 @@
               <h3 class="modal-title" id="lineModalLabel">Culmina tu perfil</h3>
             </div>
             <div class="modal-body">
-                <div>
-                    <div class="row">
-                      <div class="col-md-10 ">
-                        <form class="form-horizontal">
-                          <fieldset>         
-                      <!-- Text input-->      
-                      <div class="form-group">
-                        <label class="col-md-4 control-label" for="firstName">Nombre</label>  
-                        <div class="col-md-8">
-                          <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                              <input id="firstName" name="firstName" type="text" placeholder="Nombre" class="form-control input-md">
-                          </div>          
-                        </div>        
-                      </div>
-                      
-                      <!-- File Button --> 
-                      <div class="form-group">
-                        <label class="col-md-4 control-label" for="Upload photo">Subir foto</label>
-                        <div class="col-md-4"><input id="Upload photo" name="Upload photo" class="input-file" type="file"></div>
-                      </div>
-                      
-                      <!-- Text input-->
-                      <div class="form-group">
-                        <label class="col-md-4 control-label" for="Date Of Birth">Fecha de Nacimiento</label>  
-                        <div class="col-md-8">      
-                          <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-birthday-cake"></i></div>
-                            <input id="Date Of Birth" name="Date Of Birth" type="text" placeholder="Fecha de Nacimiento" class="form-control input-md">
-                          </div>          
-                        </div>
-                      </div>      
-                      <!-- Text input-->
-                      <div class="form-group">
-                        <label class="col-md-4 control-label" for="lastName">Primer Apellido</label>  
-                        <div class="col-md-8">
-                          <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-male" style="font-size: 20px;"></i></div>
-                            <input id="lastName" name="lastName" type="text" placeholder="Primer Apellido" class="form-control input-md">
+              <div>
+                <div class="row">
+                  <div class="col-md-10 ">
+                    <form class="form-horizontal">
+                      <fieldset>         
+                        <!-- Text input-->      
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="firstName">Nombre</label>  
+                          <div class="col-md-8">
+                            <div class="input-group">
+                              <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                                <input id="firstName" name="firstName" type="text" placeholder="Nombre" class="form-control input-md">
+                            </div>          
+                          </div>        
+                        </div>                  
+                        <!-- File Button --> 
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="Upload photo">Subir foto</label>
+                          <div class="col-md-4"><input id="Upload photo" name="Upload photo" class="input-file" type="file"></div>
+                        </div>                  
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="Date Of Birth">Fecha de Nacimiento</label>  
+                          <div class="col-md-8">      
+                            <div class="input-group">
+                              <div class="input-group-addon"><i class="fa fa-birthday-cake"></i></div>
+                              <input class="form-control" id="dateofBirth" name="dateofBirth" placeholder="MM/DD/YYY" type="text"/>
+                            </div>          
                           </div>
-                        </div>
-                      </div>      
-                      <!-- Text input-->
-                      <div class="form-group">
-                        <label class="col-md-4 control-label" for="motherLastName">Segundo Apellido</label>  
-                        <div class="col-md-8">
-                          <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-female" style="font-size: 20px;"></i></div>
-                            <input id="motherLastName" name="motherLastName" type="text" placeholder="Segundo Apellido" class="form-control input-md">
+                        </div>      
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="lastName">Primer Apellido</label>  
+                          <div class="col-md-8">
+                            <div class="input-group">
+                              <div class="input-group-addon"><i class="fa fa-male" style="font-size: 20px;"></i></div>
+                              <input id="lastName" name="lastName" type="text" placeholder="Primer Apellido" class="form-control input-md">
+                            </div>
                           </div>
-                        </div>
-                      </div>      
-                      <!-- Multiple Radios (inline) -->
-                      <div class="form-group">
-                        <label class="col-md-4 control-label" for="Gender">Género</label>
-                        <div class="col-md-4"> 
-                          <label class="radio-inline" for="Gender-0">
-                            <input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
-                            Masculino
-                          </label> 
-                          <label class="radio-inline" for="Gender-1">
-                            <input type="radio" name="Gender" id="Gender-1" value="2">
-                            Femenino
-                          </label> 
-                        </div>
-                      </div> 
-                      <div class="form-group">
+                        </div>      
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="motherLastName">Segundo Apellido</label>  
+                          <div class="col-md-8">
+                            <div class="input-group">
+                              <div class="input-group-addon"><i class="fa fa-female" style="font-size: 20px;"></i></div>
+                              <input id="motherLastName" name="motherLastName" type="text" placeholder="Segundo Apellido" class="form-control input-md">
+                            </div>
+                          </div>
+                        </div>      
+                        <!-- Multiple Radios (inline) -->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="Gender">Género</label>
+                          <div class="col-md-8"> 
+                            <label class="radio-inline" for="Gender-0">
+                              <input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
+                              Masculino
+                            </label> 
+                            <label class="radio-inline" for="Gender-1">
+                              <input type="radio" name="Gender" id="Gender-1" value="2">
+                              Femenino
+                            </label> 
+                          </div>
+                        </div> 
+                        <!-- Text input-->
+                        <div class="form-group">
                           <label class="col-md-4 control-label" for="Email Address">Correo Electrónico</label>  
                           <div class="col-md-8">
                             <div class="input-group">
@@ -356,45 +345,45 @@
                               <input id="Email Address" name="Email Address" type="text" placeholder="Correo Electrónico" class="form-control input-md">
                             </div>
                           </div>
+                        </div>
+                        <!-- Text input-->     
+                        <div class="form-group">
+                          <label class="col-md-4 control-label col-xs-12" for="Permanent Address">Dirección</label>  
+                          <div class="col-md-8">
+                            <input id="Permanent Address" name="Permanent Address" type="text" placeholder="Dirección" class="form-control input-md">
+                          </div>              
                         </div>     
-                      <div class="form-group">
-                        <label class="col-md-4 control-label col-xs-12" for="Permanent Address">Dirección</label>  
-                        <div class="col-md-8">
-                          <input id="Permanent Address" name="Permanent Address" type="text" placeholder="Dirección" class="form-control input-md">
-                        </div>              
-                      </div>            
-                          
-                      <!-- Textarea -->
-                      <div class="form-group">
-                        <label class="col-md-4 control-label" for="descripcion">Descripción (max 200 palabras)</label>
-                        <div class="col-md-8">                     
-                          <textarea class="form-control" rows="10"  id="descripcion" name="descripcion">Descripción</textarea>
-                        </div>
-                      </div> 
-                      <h3 class="modal-title center" id="lineModalLabel">Sobre tu Bici</h3>
-                      <hr>
-                      <!-- Text input-->
-                      <div class="form-group">
-                        <label class="col-md-4 control-label" for="brand">Marca</label>  
-                        <div class="col-md-8">
-                          <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                            <input id="brand" name="brand" type="text" placeholder="Marca" class="form-control input-md">
+                        <!-- Textarea -->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="descripcion">Descripción (max 200 palabras)</label>
+                          <div class="col-md-8">                     
+                            <textarea class="form-control" rows="10"  id="descripcion" name="descripcion">Descripción</textarea>
+                          </div>
+                        </div> 
+                        <h3 class="modal-title center" id="lineModalLabel">Sobre tu Bici</h3>
+                        <hr>
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="brand">Marca</label>  
+                          <div class="col-md-8">
+                            <div class="input-group">
+                              <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                              <input id="brand" name="brand" type="text" placeholder="Marca" class="form-control input-md">
+                            </div>
+                          </div>
+                        </div>   
+                        <!-- Text input-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" for="model">Modelo</label>  
+                          <div class="col-md-8">
+                            <div class="input-group">
+                              <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                              <input id="model" name="model" type="text" placeholder="Modelo" class="form-control input-md">
+                            </div>
                           </div>
                         </div>
-                      </div>   
-                      <!-- Text input-->
-                      <div class="form-group">
-                        <label class="col-md-4 control-label" for="model">Modelo</label>  
-                        <div class="col-md-8">
-                          <div class="input-group">
-                            <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
-                            <input id="model" name="model" type="text" placeholder="Modelo" class="form-control input-md">
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Text input-->
-                      <div class="form-group">
+                        <!-- Text input-->
+                        <div class="form-group">
                           <label class="col-md-4 control-label" for="year">Año</label>  
                           <div class="col-md-8">
                             <div class="input-group">
@@ -403,22 +392,23 @@
                             </div>
                           </div>
                         </div>   
-                      <div class="form-group">
-                        <label class="col-md-4 control-label" ></label>  
-                        <div class="col-md-4">
-                          <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span>Subir</a>
-                          <a href="#" class="btn btn-danger" value=""><span class="glyphicon glyphicon-remove-sign"></span> Limpiar</a>
-                        </div>
-                      </div>                   
+                        <!-- BTN-->
+                        <div class="form-group">
+                          <label class="col-md-4 control-label" ></label>  
+                          <div class="col-md-4">
+                            <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span>Subir</a>
+                            <a href="#" class="btn btn-danger" value=""><span class="glyphicon glyphicon-remove-sign"></span> Limpiar</a>
+                          </div>
+                        </div>                   
                       </fieldset>
-                      </form>
-                      </div>
-                      <div class="col-md-2 hidden-xs">
-                        <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">
-                      </div>                  
-                    </div>
-                  </div>  
-              </div>
+                    </form>
+                  </div>
+                  <div class="col-md-2 hidden-xs">
+                    <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">
+                  </div>                  
+                </div>
+              </div>  
+            </div>
             <div class="modal-footer">
               <div class="btn-group btn-group-justified" role="group" aria-label="group button">
                 <div class="btn-group" role="group">
@@ -434,14 +424,61 @@
             </div>
           </div>
         </div>
-      </div>   
-    </div>
-
-
+      </div>
+    </section>
+    <!-- FIN registro perfil modal -->
+    <!-- INICIO ciclistas -->
+    <section id="cyclist">
+      <div class="container">
+       <!--  <div class="col-md-3 well">
+          <center>
+            <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle"></a>
+            <h3>Joe Sixpack</h3>
+            <em>click my face for more</em>
+          </center>
+        </div> -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                  <h4 class="modal-title" id="myModalLabel">More About Joe</h4>
+                </div>
+                <div class="modal-body">
+                  <center>
+                    <img src="" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                    <h3 class="media-heading">Joe Sixpack <small>USA</small></h3>
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="firstName">Ciudad</label>  
+                      <div class="col-md-8"><p id=cityName></p></div>        
+                    </div>
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="firstName">Mis rutas</label>  
+                      <div class="col-md-8"><p id=tours></p></div>        
+                    </div>
+                  </center>
+                  <hr>
+                  <center>
+                    <p class="text-left" id="cyclistDescription"><strong>Sobre Mi: </strong><br></p>
+                    <br>
+                  </center>
+                </div>
+                <div class="modal-footer">
+                  <center>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">I've heard enough about Joe</button>
+                  </center>
+                </div>
+              </div>
+            </div>
+      </div>
+    </section>  
+    <!-- FIN ciclistas -->  
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/7873633050.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <script src="assets/js/moment.min.js"></script>
     <script src="assets/js/app.js"></script> 
   </body>
