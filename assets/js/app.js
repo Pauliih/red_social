@@ -205,6 +205,8 @@ $(document).ready(function() {
     $('#cyclistFriends').addClass('hide');
   });
   $('#cyclists').click(function(){
+    $('#cyclist .container').append('<div class="col-md-3 well imgBox"></div>');
+    $('.imgBox').remove();
     $('#cyclist').removeClass('hide');
     $('#calendarSection').addClass('hide');
     $('#slide').addClass('hide');
@@ -212,6 +214,15 @@ $(document).ready(function() {
     $('#newfeed').addClass('hide');
     $('#myProfile').addClass('hide');
     $('#cyclistFriends').addClass('hide');
+    for (var i = 0; i < cyclist.length; i++){
+      $('#cyclist .container').append('<div class="col-md-3 well imgBox">'+
+      '<center><a>'+
+      '<img src="'+ cyclist[i].photo +'" name="aboutme" width="140" height="140"'+
+       'data-id="' + cyclist[i].id+'"class="img-circle select"></a>'+
+      '<h3>'+cyclist[i].name+'</h3><button class="btn btn-primary">Añadir</button></center></div>')
+    //href="#aboutModal" data-toggle="modal" data-target="#myModal"
+    }
+    // $('.select').click(idCyclist);
   });
   $('#eventCalendar').click(function(){
     $('#calendarSection').removeClass('hide');
@@ -279,4 +290,43 @@ $(document).ready(function() {
     $('#cyclistFriends').addClass('hide');
   });
   */
+
+//-------------------DATA CICLISTAS---------------//
+var cyclist = [
+  {
+    'id':1,
+    'name':'Joe Sixpack',
+    'photo':'https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R'
+  },
+  {
+    'id':2,
+    'name':'Martin Sixpack',
+    'photo':'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSW4P7yp8lxbGy_vUbPOjQcG1vb0cgByQvSWOBYzY5hViMpcpwA_g'
+  },
+  {
+    'id':3,
+    'name':'Sonia Sixpack',
+    'photo':'https://media.istockphoto.com/photos/official-portrait-of-a-blonde-woman-picture-id484023190?k=6&m=484023190&s=612x612&w=0&h=rgosBBFek2GyEkYkzzoin8sm8xkbhs_pNDEscbW4VVg='
+  },
+  {
+    'id':4,
+    'name':'Alonso Sixpack',
+    'photo':'https://fotofigaredo.files.wordpress.com/2015/01/foto-carnet.jpg'
+  },
+  {
+    'id':5,
+    'name':'Martha Sixpack',
+    'photo':'https://t3.ftcdn.net/jpg/01/57/67/88/240_F_157678844_8bbNSQ5ZiGxFWhCEpLr0mAqm55E5onmm.jpg'
+  },
+  {
+    'id':6,
+    'name':'Jessica Sixpack',
+    'photo':'https://thumbs.dreamstime.com/t/retrato-de-la-mujer-hermosa-joven-sonriente-feliz-en-el-su%C3%A9ter-negro-que-presenta-contra-el-fondo-blanco-del-estudio-74887604.jpg'
+  },
+  {
+    'id':7,
+    'name':'Nathalia Sixpack',
+    'photo':'http://1.bp.blogspot.com/-Wmg0lELm8gg/TgY_gqxlwJI/AAAAAAAABc4/NW68HVwue18/s1600/megan-fox-31.jpg'
+  }
+]
 });
