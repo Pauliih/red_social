@@ -15,6 +15,7 @@ $(document).ready(function() {
   $('#send').click(function() {
     var message = $('#txtpost').val(); // Rescato el mensaje del input
     $('#txtpost').val(""); // vacío el input del mensaje
+    var url = $("#urlInput").val(); //url de la foto
     // Generar la hora con moment
     var dateNow = moment().format('MMMM Do YYYY, h:mm a');
 
@@ -34,7 +35,7 @@ $(document).ready(function() {
                       '</div>' +
                       '<div class="post-contents">' +
                         '<p>' + message + '</p>' +
-                        /*'<img src="assets/img/slide-01-1252x644.jpg">' +*/
+                        '<img src="' + url + '" alt="...">' +
                       '</div>' +
                       '<div class="comments-likes">' +
                         '<div class="menu-likes-comments-share">' +
