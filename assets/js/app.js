@@ -1,6 +1,6 @@
 $(document).ready(function() {
   
-var containerPosts = $('#contPost'); //El contenedor del chat lo pongo en una var.
+  var containerPosts = $('#contPost'); //El contenedor del chat lo pongo en una var.
 
   $('#filter-newsfeed').on('change', function() {
       var selection = $('#filter-newsfeed').val();
@@ -13,16 +13,56 @@ var containerPosts = $('#contPost'); //El contenedor del chat lo pongo en una va
     })
   //Insetar el mensaje en el chat
   $('#send').click(function() {
-    var message = $('#post').val(); // Rescato el mensaje del input
-    
-    $('#post').val(""); // vacío el input del mensaje
-    
-    
+    var message = $('#txtpost').val(); // Rescato el mensaje del input
+    $('#txtpost').val(""); // vacío el input del mensaje
     // Generar la hora con moment
     var dateNow = moment().format('MMMM Do YYYY, h:mm a');
 
     // Le paso los mensajes rescatados y prepend para añadir el elemento antes que el otro
-    containerPosts.prepend('<div class="row message">' + '<p>' + message + '</p><br><span>' + dateNow + '</span></div>');
+    containerPosts.prepend('<div class="wall-item">' + 
+                    '<div class="row">' +
+                      '<div class="meta">' + 
+                        '<img class="user-img" src="assets/img/img_user.jpg">' +
+                        '<div class="user">' + 
+                          '<a class="owner-link" href="#"> User_Ciclista</a>' + 
+                        '</div>' +
+                        '<div class="post-meta">' +
+                          '<span class="time-created">' + dateNow + '</span>' +
+                          '<span class="time-created"></span>' +
+                          '<span class="time-created">- <i class="fa fa-clock-o"></i></span>' +
+                        '</div>' +
+                      '</div>' +
+                      '<div class="post-contents">' +
+                        '<p>' + message + '</p>' +
+                        /*'<img src="assets/img/slide-01-1252x644.jpg">' +*/
+                      '</div>' +
+                      '<div class="comments-likes">' +
+                        '<div class="menu-likes-comments-share">' +
+                          '<li><a href="#">Comment</a></li>' +
+                          '<li><a href="#">Like</a></li>' +
+                        '</div>' +
+                        '<div class="comments-list">' +
+                          '<div class="comments-item">' +
+                            '<div class="row">' +
+                              '<div class="col-md-1">' +
+                                '<img class="comment-user-img" src="assets/img/img_user.jpg">' +
+                              '</div>' +
+                              '<div class="col-md-11">' +
+                                '<form class="comment-container" autocomplete="off">' +
+                                  '<!-- fieldset: crear un recuadro que rodea a los elementos de formulario colocados dentro de ella -->' +
+                                  '<fieldset>' +
+                                    '<div class="comment-attach-photo"><i class="fa fa-camera"></i>' +
+                                    '</div>' +
+                                    '<span type="text" class="comment-box" placeholder="Comenta esto..." contenteditable="true"></span>' +
+                                  '</fieldset>' +
+                                '</form>' +
+                              '</div>' +
+                            '</div>' +
+                          '</div>' +
+                        '</div>' +
+                      '</div>' +
+                    '</div>' +
+                  '</div>');
   });
 
 
@@ -226,4 +266,17 @@ var containerPosts = $('#contPost'); //El contenedor del chat lo pongo en una va
     $('#formLogin').removeClass('hide');
     
   }
+
+  // Evento del post hecho
+  /*
+  $('.owner-link').click(function(){
+    $('#myProfile').removeClass('hide');
+    $('#slide').addClass('hide');
+    $('#post').addClass('hide');
+    $('#newfeed').addClass('hide');
+    $('#calendarSection').addClass('hide');
+    $('#cyclist').addClass('hide');
+    $('#cyclistFriends').addClass('hide');
+  });
+  */
 });

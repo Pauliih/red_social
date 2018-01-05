@@ -66,14 +66,14 @@ body,html {
   color: #fff;
 }
 
+/* SIDEBAR */
 
 /* Elimina bordes redondeados */
-
 nav.sidebar.navbar {
   border-radius: 0px;
 }
 
-nav.sidebar, .main{
+nav.sidebar, #main{
   -webkit-transition: margin 200ms ease-out;
   -moz-transition: margin 200ms ease-out;
   -o-transition: margin 200ms ease-out;
@@ -81,13 +81,13 @@ nav.sidebar, .main{
 }
 
 /* Add gap to nav and right windows.*/
-.main{
+#main{
   padding: 10px 10px 0 10px;
 }
 
 /* .....NavBar: Icon only with coloring/layout.....*/
 
-/*small/medium side display*/
+/* small/medium side display*/
 @media (min-width: 768px) {
 
     /*Allow main to be next to Nav*/
@@ -98,7 +98,7 @@ nav.sidebar, .main{
         float: right;
     }
 
-    /*lets nav bar to be showed on mouseover*/
+    /*se muestra navbar al pasar el mouse (on mouseover)*/
     nav.sidebar:hover + .main{
         margin-left: 200px;
     }
@@ -206,12 +206,14 @@ nav.sidebar .navbar-nav .open .dropdown-menu>li>a:hover, nav.sidebar .navbar-nav
 nav:hover .forAnimate{
     opacity: 1;
 }
+
 section{
     padding-left: 15px;
 }
 
 
 /*INICIO Estilos del login*/
+
 /* #loginForm {
     background-image: url(../img/inicio.jpg);
     background-repeat: no-repeat;
@@ -451,4 +453,147 @@ section{
   padding:7px;
   margin-bottom:5px;
   margin-top:-5px;
+}
+
+/* Post hecho */
+.wall-item {
+  padding: 30px;
+  padding-top: 10px;
+  border: 1px solid #eee;
+  margin-top: 20px;
+  background-color: #fff;
+  padding-bottom: 0;
+}
+
+.wall-item:first-child {
+  margin-top: 0;
+}
+
+.wall-item .user-img {
+  border-radius: 50px;
+  display: inline-block;
+  float: left;
+  margin-right: 10px;
+}
+
+.wall-item .meta .post-menu {
+  float: right;
+}
+
+
+.wall-item .meta .user {
+  display: inline-block;
+  margin-top: 3px;
+}
+
+.post-content p {
+    font-size: 15px;
+}
+
+.wall-item .meta .user a {
+  font-weight: bold;
+  color: #01B0F1FF;
+}
+
+.time-created {
+  font-size: 14px;
+  font-style: italic;
+  color: #999;
+}
+
+.wall-item .post-contents {
+  margin-top: 15px;
+}
+
+.wall-item .post-contents p {
+  /* para que no se salga el texto */
+  word-break: break-word;
+  text-align: justify;
+}
+
+.wall-item .post-contents img {
+  max-width: 100%;
+  border: 1px solid #eae8e8;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.comments-likes {
+  min-height: 50px;
+  width: 100%;
+}
+
+.menu-likes-comments-share {
+  margin-bottom: 10px;
+}
+
+.menu-likes-comments-share li {
+  display: inline-block;
+}
+
+.menu-likes-comments-share li::after {
+  content: "-";
+  margin-left: 5px;
+  margin-right: 5px;
+  color: #ccc;
+}
+
+.comments-list {
+  background-color: #fbfbfb;
+  margin-left: -15px;
+  margin-right: -15px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.comments-list .comments-item {
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.comments-list .comments-item .comment-user-img {
+  display: inline-block;
+  border-radius: 32px;
+}
+
+.comments-item .col-md-11 {
+  padding-left: 0;
+}
+
+.comment-container {
+  z-index: initial;
+}
+
+.comment-container {
+  padding-bottom: 10px;
+  position: relative;
+  z-index: 0;
+}
+
+.comment-attach-photo .fa-camera {
+  float: right;
+  position: relative;
+  margin-right: 5px;
+  margin-top: 5px;
+  width: 25px;
+  height: 25px;
+  padding: 5px;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.comment-box {
+  padding: 5px 65px 5px 5px !important;
+}
+
+.comment-box {
+  width: 100%;
+  border: 1px solid #eee;
+  padding: 5px 30px 5px 5px !important;
+  margin-bottom: 5px;
+  outline: 0;
+  display: block;
+  resize: vertical;
+  background: #fff;
+  min-height: 32px;
 }
