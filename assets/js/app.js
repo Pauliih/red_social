@@ -59,7 +59,6 @@ $(document).ready(function() {
     firebase.initializeApp(config);
 
     var uid = "";
-    
 //----------------ANIMACIÓN LOGIN/REGISTER--------------------//
   $('#login-form-link').click(function(e) {
     $("#login-form").delay(100).fadeIn(100);
@@ -84,9 +83,13 @@ $(document).ready(function() {
     $('#emailLogin').val("");
     $('#passwordLogin').val("");
       // Sign in
-    var promise = auth.signInWithEmailAndPassword(email, pass);
-    promise.catch(e => console.log(e.message));      
-  });
+    var promise = auth.signInWithEmailAndPassword(email, pass)
+    .then(function(user) {
+      console.log(user);
+     })
+    .promise.catch(e => console.log(e.message));      
+    });
+
   $('#register').click(function() {
     var email = $('#emailRegister').val();
     var pass = $('#passwordRegister').val();
@@ -94,10 +97,25 @@ $(document).ready(function() {
     $('#emailRegister').val("");
     $('#passwordRegister').val("");
     // Sign in
-    var promise = auth.createUserWithEmailAndPassword(email, pass);
-    promise.catch(e => console.log(e.message));
+    var promise = auth.createUserWithEmailAndPassword(email, pass)
+    .then(function(user) {
+        console.log(user);
+    })
+    .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        if (errorCode == 'auth/weak-password') {
+            alert('Contraseña muy débil');
+        } else {
+            alert(errorMessage);
+        }
+        console.log(error);
+    });
+    /* var promise = auth.createUserWithEmailAndPassword(email, pass);
+    promise.catch(e => console.log(e.message)); */
   }); 
-
+  
   $('#logOut').click(function() {
     firebase.auth().signOut();
   });
@@ -106,12 +124,10 @@ $(document).ready(function() {
     if(firebaseUser) {
       console.log(firebaseUser);
       uid = firebaseUser.uid;
-     // $('#logOut').classList.remove('hide');
-      $('#formLogin').hide();
-      $('#bar').classList.remove('hidden');
-      $('#main').classList.remove('hidden')
+      start();
     } else {
       console.log('no logueado');
+      stop();
       //$('#logOut').classList.add('hide');
     }    
   });
@@ -134,5 +150,64 @@ $(document).ready(function() {
       '<h3>'+nameCyclist+'</h3><em>click my face for more</em></center></div>')
     }
 
+  //-------------EVENTOS BARRA LATERAL -------------------//
+  $('#init').click(function(){
+    $('#slide').removeClass('hide');
+    $('#post').removeClass('hide');
+    $('#newfeed').removeClass('hide');
+    $('#calendarSection').addClass('hide');
+    $('#cyclist').addClass('hide');
+    $('#myProfile').addClass('hide');
+    $('#cyclistFriends').addClass('hide');
+  });
+  $('#cyclists').click(function(){
+    $('#cyclist').removeClass('hide');
+    $('#calendarSection').addClass('hide');
+    $('#slide').addClass('hide');
+    $('#post').addClass('hide');
+    $('#newfeed').addClass('hide');
+    $('#myProfile').addClass('hide');
+    $('#cyclistFriends').addClass('hide');
+  });
+  $('#eventCalendar').click(function(){
+    $('#calendarSection').removeClass('hide');
+    $('#cyclist').addClass('hide');
+    $('#slide').addClass('hide');
+    $('#post').addClass('hide');
+    $('#newfeed').addClass('hide');
+    $('#myProfile').addClass('hide');
+    $('#cyclistFriends').addClass('hide');
+  });
 
+//-------------EVENTOS BARRA SUPERIOR -------------------//
+  $('#profile').click(function(){
+    $('#myProfile').removeClass('hide');
+    $('#slide').addClass('hide');
+    $('#post').addClass('hide');
+    $('#newfeed').addClass('hide');
+    $('#calendarSection').addClass('hide');
+    $('#cyclist').addClass('hide');
+    $('#cyclistFriends').addClass('hide');
+  });
+  $('#friends').click(function(){    
+    $('#cyclistFriends').removeClass('hide');
+    $('#cyclist').addClass('hide');
+    $('#calendarSection').addClass('hide');
+    $('#slide').addClass('hide');
+    $('#post').addClass('hide');
+    $('#newfeed').addClass('hide');
+    $('#myProfile').addClass('hide');
+  });
+
+  //-----------------INICIO DE SESION--------------//
+  function start(){
+    $('#bar').removeClass('hide');
+    $('#main').removeClass('hide');
+    $('#formLogin').addClass('hide');
+  }
+  function stop(){
+    $('#bar').addClass('hide');
+    $('#main').addClass('hide');
+    $('#formLogin').removeClass('hide');
+  }
 });

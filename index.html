@@ -12,6 +12,7 @@
     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase-messaging.js"></script>
+    <link rel="stylesheet" href="assets/css/bootstrap-year-calendar.min.css">
     <!-- Bootstrap Date-Picker Plugin -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <!-- Bootstrap -->
@@ -22,7 +23,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body>
-    <section id="bar" class="">
+    <section id="bar" class="hide">
       <nav class="navbar navbar-default navbar-inverse navbar-fixed-top navbar-toppy">
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
@@ -51,9 +52,9 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Perfil <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="#">Ver perfil</a></li>
-                  <li><a href="#">Amigos Ciclistas</a></li>
-                  <li><a href="#">Crear evento</a></li>
+                  <li><a href="#" id="profile">Ver perfil</a></li>
+                  <li><a href="#" id="friends">Amigos Ciclistas</a></li>
+                  <!-- <li><a href="#">Crear evento</a></li> -->
                   <li role="separator" class="divider"></li>
                   <li><a href="#" id="logOut">Cerrar Sesión</a></li>
                 </ul>
@@ -63,8 +64,7 @@
         </div><!-- /.container-fluid -->
       </nav>
     </section>
-
-    <section id="main" class="">
+    <section id="main" class="hide">
       <div class="container-fluid container-fluid-left">
         <div class="row">
           <div class="col-md-2">            
@@ -86,53 +86,51 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">Inicio<span style="font-size:16px;" class="pull-right  showopacity glyphicon glyphicon-home"></span></a></li>
-                    <li ><a href="#">Ciclistas<span style="font-size:16px;" class="pull-right showopacity fa fa-bicycle"></span></a></li>
-                    <li ><a href="#">Cicletadas<span style="font-size:16px;" class="pull-right showopacity glyphicon glyphicon-calendar"></span></a></li>
-                    <li ><a href="#">Talleres de Bicis<span style="font-size:16px;" class="pull-right showopacity glyphicon glyphicon-wrench"></span></a></li>                    
+                    <li class="active"><a href="#" id="init">Inicio<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+                    <li><a href="#" id="cyclists">Ciclistas<span style="font-size:16px;" class="pull-right hidden-xs showopacity fa fa-bicycle"></span></a></li>
+                    <li><a href="#" id="eventCalendar">Cicletadas<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-calendar"></span></a></li>
+                    <li><a href="#"id="sites">Talleres de Bicis<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-wrench"></span></a></li>                    
                   </ul>
                 </div>
               </div>
             </nav>            
-          </div>
-          <div class="col-md-12">
-            <section id="slide" class="carousel slide">
-                <ol class="carousel-indicators">
-                  <li data-target="#slide" data-slide-to="0" class="active"></li>
-                  <li data-target="#slide" data-slide-to="1"></li>
-                  <li data-target="#slide" data-slide-to="2"></li>
-                </ol>
-                
-                <div class="carousel-inner" role="listbox">
-                  <div class="item active">
-                    <img src="assets/img/slide-01-1252x644.jpg" class="img-responsive">
-                    <div class="carousel-caption">
-                      <h3>Ciclistas</h3>
-                      <p>Conoce otros ciclistas</p>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <img src="assets/img/slide-02-1252x644.jpg" class="img-responsive">
-                    <div class="carousel-caption">
-                      <h3>Cicletadas</h3>
-                      <p>Buscar eventos o crear uno nuevo</p>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <img src="assets/img/slide-03-1252x644.jpg" class="img-responsive">
-                    <div class="carousel-caption">
-                      <h3>Compartir</h3>
-                      <p>Comparte tus fotos o lugares visitados</p>
-                    </div>
-                  </div>
+          </div>          
+          <section id="slide" class="carousel slide hide">
+            <ol class="carousel-indicators">
+              <li data-target="#slide" data-slide-to="0" class="active"></li>
+              <li data-target="#slide" data-slide-to="1"></li>
+              <li data-target="#slide" data-slide-to="2"></li>
+            </ol>                
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <img src="assets/img/slide-01-1252x644.jpg" class="img-responsive">
+                <div class="carousel-caption hidden-xs hidden-sm">
+                  <h3>Ciclistas</h3>
+                  <p>Conoce otros ciclistas</p>
                 </div>
+              </div>
+              <div class="item">
+                <img src="assets/img/slide-02-1252x644.jpg" class="img-responsive">
+                <div class="carousel-caption hidden-xs hidden-sm">
+                  <h3>Cicletadas</h3>
+                  <p>Buscar eventos o crear uno nuevo</p>
+                </div>
+              </div>
+              <div class="item">
+                <img src="assets/img/slide-03-1252x644.jpg" class="img-responsive">
+                <div class="carousel-caption hidden-xs hidden-sm">
+                  <h3>Compartir</h3>
+                  <p>Comparte tus fotos o lugares visitados</p>
+                </div>
+              </div>
+            </div>
 
-                <!-- Controles -->
-                <a href="#slide" class="left carousel-control" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-                <a href="#slide" class="right carousel-control" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-            </section><br>
-
-            <div id="post" class="">
+            <!-- Controles -->
+            <a href="#slide" class="left carousel-control" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a href="#slide" class="right carousel-control" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+          </section><br>
+          <div class="col-md-12">
+            <div id="post" class="hide">
               <div class="row">
                   <div class="col-md-10 col-md-offset-1 post">               
                     <div class="tabs-input">
@@ -168,9 +166,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div id="newfeed" class="">
+            </div>   
+            <div id="newfeed" class="hide">
               <div class="row">
                 <div class="col-md-10 col-md-offset-1 newsfeed">
                   <div class="row">
@@ -193,8 +190,8 @@
         </div>
       </div>
     </section>
-    <!-- INICIO formulario login -->
-    <section id="formLogin" class="">
+      <!-- INICIO formulario login -->
+    <section id="formLogin" class="hide">
       <div class="row logoLogin">
         <div class="col-md-5 col-md-offset-4">
           <img class="logo_bike" alt="Brand" src="assets/img/logo3.png">
@@ -264,9 +261,8 @@
         </div>
       </div>      
     </section>
-    <!-- FIN formulario login -->
-
-    <!-- INICIO registro perfil modal -->
+      <!-- FIN formulario login --> 
+      <!-- INICIO registro perfil modal -->
     <section>
       <div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -407,7 +403,7 @@
                       </fieldset>
                     </form>
                   </div>
-                  <div class="col-md-2">
+                  <div class="col-md-2 hidden-xs">
                     <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">
                   </div>                  
                 </div>
@@ -418,7 +414,7 @@
                 <div class="btn-group" role="group">
                   <button type="button" class="btn btn-default" data-dismiss="modal"  role="button">Cerrar</button>
                 </div>
-                <div class="btn-group btn-delete" role="group">
+                <div class="btn-group btn-delete hidden" role="group">
                   <button type="button" id="delImage" class="btn btn-default btn-hover-red" data-dismiss="modal"  role="button">Limpiar</button>
                 </div>
                 <div class="btn-group" role="group">
@@ -431,17 +427,58 @@
       </div>
     </section>
     <!-- FIN registro perfil modal -->
-
     <!-- INICIO ciclistas -->
-    <section id="cyclist">
+    <section id="cyclist" class="hide">
       <div class="container">
-       <!--  <div class="col-md-3 well">
+         <div class="col-md-3 well">
           <center>
             <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle"></a>
             <h3>Joe Sixpack</h3>
-            <em>click my face for more</em>
+            <button class="btn btn-primary">Añadir</button>
           </center>
-        </div> -->
+        </div> 
+        <div class="col-md-3 well">
+            <center>
+              <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="data:image/jpeg;base64,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" name="aboutme" width="140" height="140" class="img-circle"></a>
+              <h3>Joe Sixpack</h3>
+              <button class="btn btn-primary">Añadir</button>
+            </center>
+          </div> 
+          <div class="col-md-3 well">
+            <center>
+              <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://media.istockphoto.com/photos/official-portrait-of-a-blonde-woman-picture-id484023190?k=6&m=484023190&s=612x612&w=0&h=rgosBBFek2GyEkYkzzoin8sm8xkbhs_pNDEscbW4VVg=" name="aboutme" width="140" height="140" class="img-circle"></a>
+              <h3>Joe Sixpack</h3>
+              <button class="btn btn-primary">Añadir</button>
+            </center>
+          </div> 
+            <div class="col-md-3 well">
+              <center>
+                <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://fotofigaredo.files.wordpress.com/2015/01/foto-carnet.jpg" name="aboutme" width="140" height="140" class="img-circle"></a>
+                <h3>Joe Sixpack</h3>
+                <button class="btn btn-primary">Añadir</button>
+              </center>
+            </div> 
+              <div class="col-md-3 well">
+                <center>
+                  <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://t3.ftcdn.net/jpg/01/57/67/88/240_F_157678844_8bbNSQ5ZiGxFWhCEpLr0mAqm55E5onmm.jpg" name="aboutme" width="140" height="140" class="img-circle"></a>
+                  <h3>Joe Sixpack</h3>
+                  <button class="btn btn-primary">Añadir</button>
+                </center>
+              </div> 
+              <div class="col-md-3 well">
+                <center>
+                  <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://thumbs.dreamstime.com/t/retrato-de-la-mujer-hermosa-joven-sonriente-feliz-en-el-su%C3%A9ter-negro-que-presenta-contra-el-fondo-blanco-del-estudio-74887604.jpg" name="aboutme" width="140" height="140" class="img-circle"></a>
+                  <h3>Joe Sixpack</h3>
+                  <button class="btn btn-primary">Añadir</button>
+                </center>
+              </div>
+              <div class="col-md-3 well">
+                <center>
+                  <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="http://1.bp.blogspot.com/-Wmg0lELm8gg/TgY_gqxlwJI/AAAAAAAABc4/NW68HVwue18/s1600/megan-fox-31.jpg" name="aboutme" width="140" height="140" class="img-circle"></a>
+                  <h3>Joe Sixpack</h3>
+                  <button class="btn btn-primary">Añadir</button>
+                </center>
+              </div> 
         <!-- Modal -->
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -460,7 +497,7 @@
                     </div>
                     <div class="form-group">
                       <label class="col-md-4 control-label" for="firstName">Mis rutas</label>  
-                      <div class="col-md-8"><p id=tours></p></div>        
+                      <div class="col-md-8"><p id=cyclistTours></p></div>        
                     </div>
                   </center>
                   <hr>
@@ -478,13 +515,229 @@
             </div>
       </div>
     </section>  
-    <!-- FIN ciclistas -->  
+    <!-- FIN ciclistas -->
+    <!-- INICIO eventos -->
+    <section id="calendarSection" class="hide"> 
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-2">
+              <div data-provide="calendar"></div>
+          </div>
+        </div>          
+      </div>    
+    </section> 
+    <!-- FIN eventos -->
+    <!-- INICIO mi perfil -->
+    <section id="myProfile" class="hide">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 ">
+            <form class="form-horizontal">
+              <fieldset>         
+                <!-- Text input-->      
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="firstName">Nombre</label>  
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-user"></i></div>
+                        <input id="firstName" name="firstName" type="text" placeholder="Nombre" class="form-control input-md">
+                    </div>          
+                  </div>        
+                </div>                  
+                <!-- File Button --> 
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="Upload photo">Subir foto</label>
+                  <div class="col-md-4"><input id="Upload photo" name="Upload photo" class="input-file" type="file"></div>
+                </div>                  
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="Date Of Birth">Fecha de Nacimiento</label>  
+                  <div class="col-md-8">      
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-birthday-cake"></i></div>
+                      <input class="form-control" id="dateofBirth" name="dateofBirth" placeholder="MM/DD/YYY" type="text"/>
+                    </div>          
+                  </div>
+                </div>      
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="lastName">Primer Apellido</label>  
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-male" style="font-size: 20px;"></i></div>
+                      <input id="lastName" name="lastName" type="text" placeholder="Primer Apellido" class="form-control input-md">
+                    </div>
+                  </div>
+                </div>      
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="motherLastName">Segundo Apellido</label>  
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-female" style="font-size: 20px;"></i></div>
+                      <input id="motherLastName" name="motherLastName" type="text" placeholder="Segundo Apellido" class="form-control input-md">
+                    </div>
+                  </div>
+                </div>      
+                <!-- Multiple Radios (inline) -->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="Gender">Género</label>
+                  <div class="col-md-8"> 
+                    <label class="radio-inline" for="Gender-0">
+                      <input type="radio" name="Gender" id="Gender-0" value="1" checked="checked">
+                      Masculino
+                    </label> 
+                    <label class="radio-inline" for="Gender-1">
+                      <input type="radio" name="Gender" id="Gender-1" value="2">
+                      Femenino
+                    </label> 
+                  </div>
+                </div> 
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="Email Address">Correo Electrónico</label>  
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                      <input id="Email Address" name="Email Address" type="text" placeholder="Correo Electrónico" class="form-control input-md">
+                    </div>
+                  </div>
+                </div>
+                <!-- Text input-->     
+                <div class="form-group">
+                  <label class="col-md-4 control-label col-xs-12" for="Permanent Address">Dirección</label>  
+                  <div class="col-md-8">
+                    <input id="Permanent Address" name="Permanent Address" type="text" placeholder="Dirección" class="form-control input-md">
+                  </div>              
+                </div>     
+                <!-- Textarea -->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="descripcion">Descripción (max 200 palabras)</label>
+                  <div class="col-md-8">                     
+                    <textarea class="form-control" rows="10"  id="descripcion" name="descripcion">Descripción</textarea>
+                  </div>
+                </div> 
+                <h3 class="modal-title center" id="lineModalLabel">Sobre tu Bici</h3>
+                <hr>
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="brand">Marca</label>  
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                      <input id="brand" name="brand" type="text" placeholder="Marca" class="form-control input-md">
+                    </div>
+                  </div>
+                </div>   
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="model">Modelo</label>  
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                      <input id="model" name="model" type="text" placeholder="Modelo" class="form-control input-md">
+                    </div>
+                  </div>
+                </div>
+                <!-- Text input-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" for="year">Año</label>  
+                  <div class="col-md-8">
+                    <div class="input-group">
+                      <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                      <input id="year" name="year" type="text" placeholder="Año" class="form-control input-md">
+                    </div>
+                  </div>
+                </div>   
+                <!-- BTN-->
+                <div class="form-group">
+                  <label class="col-md-4 control-label" ></label>  
+                  <div class="col-md-4">
+                    <a href="#" class="btn btn-success"><span class="glyphicon glyphicon-thumbs-up"></span>Subir</a>
+                    <a href="#" class="btn btn-danger" value=""><span class="glyphicon glyphicon-remove-sign"></span> Limpiar</a>
+                  </div>
+                </div>                   
+              </fieldset>
+            </form>
+          </div>
+          <div class="col-md-2 hidden-xs">
+            <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail ">
+          </div>                  
+        </div>
+      </div>  
+    </section>
+    <!-- FIN mi perfil -->
+    <!-- INICIO amigos -->
+    <section id="cyclistFriends" class="hide">
+        <div class="container">
+           <div class="col-md-3 well">
+            <center>
+              <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle"></a>
+              <h3>Joe Sixpack</h3>
+            </center>
+          </div> 
+          <div class="col-md-3 well">
+            <center>
+              <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://fotofigaredo.files.wordpress.com/2015/01/foto-carnet.jpg" name="aboutme" width="140" height="140" class="img-circle"></a>
+              <h3>Joe Sixpack</h3>             
+            </center>
+          </div>
+          <div class="col-md-3 well">
+            <center>
+              <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://thumbs.dreamstime.com/t/retrato-de-la-mujer-hermosa-joven-sonriente-feliz-en-el-su%C3%A9ter-negro-que-presenta-contra-el-fondo-blanco-del-estudio-74887604.jpg" name="aboutme" width="140" height="140" class="img-circle"></a>
+              <h3>Joe Sixpack</h3>              
+            </center>
+          </div>
+          <div class="col-md-3 well">
+            <center>
+              <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="http://1.bp.blogspot.com/-Wmg0lELm8gg/TgY_gqxlwJI/AAAAAAAABc4/NW68HVwue18/s1600/megan-fox-31.jpg" name="aboutme" width="140" height="140" class="img-circle"></a>
+              <h3>Joe Sixpack</h3>
+            </center>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                  <h4 class="modal-title" id="myModalLabel">More About Joe</h4>
+                </div>
+                <div class="modal-body">
+                  <center>
+                    <img src="" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                    <h3 class="media-heading">Joe Sixpack <small>USA</small></h3>
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="firstName">Ciudad</label>  
+                      <div class="col-md-8"><p id=cityName></p></div>        
+                    </div>
+                    <div class="form-group">
+                      <label class="col-md-4 control-label" for="firstName">Mis rutas</label>  
+                      <div class="col-md-8"><p id=cyclistTours></p></div>        
+                    </div>
+                  </center>
+                  <hr>
+                  <center>
+                    <p class="text-left" id="cyclistDescription"><strong>Sobre Mi: </strong><br></p>
+                    <br>
+                  </center>
+                </div>
+                <div class="modal-footer">
+                  <center>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">I've heard enough about Joe</button>
+                  </center>
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>  
+      <!-- FIN amigos -->
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="https://use.fontawesome.com/7873633050.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
     <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/bootstrap-year-calendar.min.js"></script>   
     <script src="assets/js/app.js"></script> 
   </body>
 
