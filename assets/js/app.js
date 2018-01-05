@@ -59,6 +59,7 @@ $(document).ready(function() {
     firebase.initializeApp(config);
 
     var uid = "";
+    
 //----------------ANIMACIÓN LOGIN/REGISTER--------------------//
   $('#login-form-link').click(function(e) {
     $("#login-form").delay(100).fadeIn(100);
