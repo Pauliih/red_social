@@ -112,7 +112,6 @@ $(document).ready(function() {
     promise.catch(e => console.log(e.message)); */
   }); 
   
-
   $('#logOut').click(function() {
     firebase.auth().signOut();
   });
@@ -123,8 +122,8 @@ $(document).ready(function() {
       uid = firebaseUser.uid;
      // $('#logOut').classList.remove('hide');
       //$('#formLogin').hide();
-      $('#bar').classList.remove('hidden');
-      $('#main').classList.remove('hidden')
+      //$('#bar').classList.remove('hidden');
+      //$('#main').classList.remove('hidden')
     } else {
       console.log('no logueado');
       //$('#logOut').classList.add('hide');
@@ -156,7 +155,8 @@ $(document).ready(function() {
     $('#newfeed').removeClass('hide');
     $('#calendarSection').addClass('hide');
     $('#cyclist').addClass('hide');
-
+    $('#myProfile').addClass('hide');
+    $('#cyclistFriends').addClass('hide');
   });
   $('#cyclists').click(function(){
     $('#cyclist').removeClass('hide');
@@ -164,12 +164,37 @@ $(document).ready(function() {
     $('#slide').addClass('hide');
     $('#post').addClass('hide');
     $('#newfeed').addClass('hide');
-  })
+    $('#myProfile').addClass('hide');
+    $('#cyclistFriends').addClass('hide');
+  });
   $('#eventCalendar').click(function(){
     $('#calendarSection').removeClass('hide');
     $('#cyclist').addClass('hide');
     $('#slide').addClass('hide');
-    $('#spost').addClass('hide');
+    $('#post').addClass('hide');
     $('#newfeed').addClass('hide');
+    $('#myProfile').addClass('hide');
+    $('#cyclistFriends').addClass('hide');
   });
+
+//-------------EVENTOS BARRA SUPERIOR -------------------//
+  $('#profile').click(function(){
+    $('#myProfile').removeClass('hide');
+    $('#slide').addClass('hide');
+    $('#post').addClass('hide');
+    $('#newfeed').addClass('hide');
+    $('#calendarSection').addClass('hide');
+    $('#cyclist').addClass('hide');
+    $('#cyclistFriends').addClass('hide');
+  });
+  $('#friends').click(function(){    
+    $('#cyclistFriends').removeClass('hide');
+    $('#cyclist').addClass('hide');
+    $('#calendarSection').addClass('hide');
+    $('#slide').addClass('hide');
+    $('#post').addClass('hide');
+    $('#newfeed').addClass('hide');
+    $('#myProfile').addClass('hide');
+  });
+
 });

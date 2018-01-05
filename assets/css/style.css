@@ -159,6 +159,7 @@ nav.sidebar, .main{
         float: left;
         z-index: 8000;
         margin-bottom: 0px;
+        left: 0;
     }
 
     /*give sidebar 100% width;*/
@@ -188,7 +189,7 @@ nav.sidebar, .main{
 
     /*Show all nav*/
     nav.sidebar{
-        margin-left: 0px;
+        margin-left: 0;
         float: left;
     }
     /*Show hidden items on nav*/
