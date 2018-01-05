@@ -218,6 +218,32 @@ section{
     background-size: 100%;
     height: 100vh;
 } */
+
+.title-login{
+  color: #06E0A3FF;
+  font-weight: bolder;
+}
+
+.list-signin li{
+  list-style: none;
+}
+
+.list-signin li span{
+  font-size: 3em;
+}
+
+.i-pig{
+  color: pink;
+}
+
+.i-add{
+  color: lightgreen;
+}
+
+.i-calendar{
+  color: lightblue;
+}
+
 .logoLogin {
     margin-top: 5em;
 }

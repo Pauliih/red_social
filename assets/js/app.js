@@ -1,6 +1,6 @@
 $(document).ready(function() {
   
-  var containerPosts = $('#contPost'); //El contenedor del chat lo pongo en una var.
+var containerPosts = $('#contPost'); //El contenedor del chat lo pongo en una var.
 
   $('#filter-newsfeed').on('change', function() {
       var selection = $('#filter-newsfeed').val();
@@ -14,7 +14,10 @@ $(document).ready(function() {
   //Insetar el mensaje en el chat
   $('#send').click(function() {
     var message = $('#post').val(); // Rescato el mensaje del input
+    
     $('#post').val(""); // vacío el input del mensaje
+    
+    
     // Generar la hora con moment
     var dateNow = moment().format('MMMM Do YYYY, h:mm a');
 
@@ -118,6 +121,7 @@ $(document).ready(function() {
   
   $('#logOut').click(function() {
     firebase.auth().signOut();
+    uid = "";
   });
 
   firebase.auth().onAuthStateChanged( firebaseUser => {
@@ -204,10 +208,22 @@ $(document).ready(function() {
     $('#bar').removeClass('hide');
     $('#main').removeClass('hide');
     $('#formLogin').addClass('hide');
+    $('#slide').removeClass('hide');
+    $('#post').removeClass('hide');
+    $('#newfeed').removeClass('hide');
   }
   function stop(){
     $('#bar').addClass('hide');
     $('#main').addClass('hide');
+    $('#cyclistFriends').addClass('hide');
+    $('#cyclist').addClass('hide');
+    $('#calendarSection').addClass('hide');
+    $('#slide').addClass('hide');
+    $('#post').addClass('hide');
+    $('#newfeed').addClass('hide');
+    $('#myProfile').addClass('hide');
+    $('#newfeed').addClass('hide');
     $('#formLogin').removeClass('hide');
+    
   }
 });
